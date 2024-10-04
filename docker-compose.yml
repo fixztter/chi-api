@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  #api:
+  #  build: .
+  #  ports:
+  #    - "9000:9000"
+  #  depends_on:
+  #    - db
+  db:
+    image: postgres
+    restart: on-failure
+    container_name: chiapp-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: chidb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mypassword
+    volumes:
+      - ~/misc/docker-vol/postgres-vol1/data1:/var/lib/postgresql/data
+      - ./db/up.sql:/docker-entrypoint-initdb.d/1.sql
